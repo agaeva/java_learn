@@ -22,6 +22,16 @@ public class HelperBase {
         wd.findElement(locator).sendKeys(text);
     }
 
+    protected void addType(By locator, String text) {
+        clickContact(locator);
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
+    }
+
+    protected void clickContact(By locator) {
+        wd.findElement(locator).click();
+    }
+
     private boolean isElementPresent(By by) {
         try {
             wd.findElement(by);
@@ -39,4 +49,7 @@ public class HelperBase {
             return false;
         }
     }
-}
+
+    }
+
+
