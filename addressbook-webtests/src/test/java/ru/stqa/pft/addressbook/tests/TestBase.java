@@ -12,7 +12,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    public final ApplicationManager app = new ApplicationManager(BrowserType.IE);
+    public final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
     public WebDriver wd;
 
     @BeforeMethod(alwaysRun = true)

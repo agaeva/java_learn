@@ -2,6 +2,8 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.DateContact;
 
 public class ContactHelper extends HelperBase {
@@ -15,7 +17,7 @@ public class ContactHelper extends HelperBase {
         clickContact(By.xpath("//input[21]"));
     }
 
-    public void fillFormContact(DateContact groupDateContact) {
+    public void fillFormContact(DateContact groupDateContact, boolean creation) {
         addType(By.name("firstname"), groupDateContact.getFirstname());
         addType(By.name("lastname"), groupDateContact.getLastname());
         addType(By.name("address"), groupDateContact.getAddress());
@@ -25,6 +27,12 @@ public class ContactHelper extends HelperBase {
         clickContact(By.name("fax"));
         addType(By.name("email"), groupDateContact.getEmail());
         addType(By.name("address2"), groupDateContact.getAddress2());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDateContact.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void clickButtonAdd() {
@@ -32,7 +40,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void alertMessage() {
-        wd.switchTo().alert().accept();;
+        wd.switchTo().alert().accept();
+        ;
     }
 
     public void returnHomePage() {
@@ -45,5 +54,10 @@ public class ContactHelper extends HelperBase {
 
     public void selectContact() {
         clickContact(By.name("selected[]"));
+    }
+
+    public void editContact() {
+        clickContact(By.xpath("//img[@alt='Edit']"));
+
     }
 }

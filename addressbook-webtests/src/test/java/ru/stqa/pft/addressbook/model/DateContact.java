@@ -9,10 +9,12 @@ public class DateContact {
     private final String phone3;
     private final String email;
     private final String address2;
+    private  String group;
 
-    public DateContact(String firstname, String lastname, String address, String phone1, String phone2, String phone3, String email, String address2) {
+    public DateContact(String firstname, String lastname, String group, String address, String phone1, String phone2, String phone3, String email, String address2) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.group = group;
         this.address = address;
         this.phone1 = phone1;
         this.phone2 = phone2;
@@ -51,5 +53,9 @@ public class DateContact {
 
     public String getAddress2() {
         return address2;
+    }
+
+    public String getGroup() {
+        return group;
     }
 }
