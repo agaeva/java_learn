@@ -58,4 +58,5 @@ public class DateContact {
     public String getGroup() {
         return group;
     }
+
 }
