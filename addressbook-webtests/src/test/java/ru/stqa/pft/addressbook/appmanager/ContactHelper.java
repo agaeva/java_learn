@@ -2,10 +2,14 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.DateContact;
 import ru.stqa.pft.addressbook.model.GroupDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -30,7 +34,7 @@ public class ContactHelper extends HelperBase {
         addType(By.name("address2"), groupDateContact.getAddress2());
 
        if (creation) {
-           new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDateContact.getGroup());
+           new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDateContact.getContact());
        } else {
            Assert.assertFalse(isElementPresent(By.name("new_group")));
        }
@@ -59,8 +63,8 @@ public class ContactHelper extends HelperBase {
         clickContact(By.xpath("//input[@value='Delete']"));
     }
 
-    public void selectContact() {
-        clickContact(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void editContact() {
@@ -71,5 +75,28 @@ public class ContactHelper extends HelperBase {
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
 
+    }
+    public void addContact() {
+        clickContact(By.xpath("//input[22]"));
+    }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("entry")).size();
+    }
+    public void homeClick() { clickContact(By.linkText("home page"));
+    }
+
+    public List<DateContact> getContactList() {
+        List<DateContact> contacts = new ArrayList<DateContact>();
+
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+
+        for (WebElement element : elements) {
+            String[] fullName = element.getText().split(" ");
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            DateContact contact = new DateContact(id, fullName[1], fullName[0], null, null, null, null,null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
