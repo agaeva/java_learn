@@ -19,9 +19,9 @@ public class ContactModificationTests extends TestBase {
 
     List<DateContact> before = app.getContactHelper().getContactList();
 
-    app.getContactHelper().selectContact(before.size() - 1);
+//    app.getContactHelper().selectContact();
 
-    app.getContactHelper().editContact();
+    app.getContactHelper().editContact(before.size() - 1);
 
     DateContact contact = new DateContact(before.get(before.size() - 1).getId(), "Ivan", "Petrov", null, null, null, null, null, null, null);
 

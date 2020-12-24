@@ -5,46 +5,43 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 
 
 public class TestBase {
 
-    public final ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
-    public WebDriver wd;
+  public static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  public WebDriver wd;
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
-        app.init();
+  @BeforeSuite(alwaysRun = true)
+  public void setUp() throws Exception {
+    app.init();
+  }
+
+
+  @AfterSuite(alwaysRun = true)
+  public void tearDown() throws Exception {
+    app.stop();
+  }
+
+
+  private boolean isElementPresent(By by) {
+    try {
+      wd.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
     }
+  }
 
-
-
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
-        app.stop();
+  private boolean isAlertPresent() {
+    try {
+      wd.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
     }
-
-
-    private boolean isElementPresent(By by) {
-      try {
-        wd.findElement(by);
-        return true;
-      }
-      catch (NoSuchElementException e) {
-        return false;
-      }
-    }
-
-    private boolean isAlertPresent() {
-      try {
-        wd.switchTo().alert();
-        return true;
-      }
-      catch (NoAlertPresentException e) {
-        return false;
-      }
-    }
+  }
 }

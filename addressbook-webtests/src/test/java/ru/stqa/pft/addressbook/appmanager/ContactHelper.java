@@ -67,9 +67,7 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public void editContact() {
-        clickContact(By.xpath("//img[@alt='Edit']"));
-
+    public void editContact(int index) { wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
     }
 
     public boolean isThereAContact() {
@@ -92,9 +90,11 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (WebElement element : elements) {
-            String[] fullName = element.getText().split(" ");
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            DateContact contact = new DateContact(id, fullName[1], fullName[0], null, null, null, null,null, null, null);
+
+            DateContact contact = new DateContact(id, cells.get(2).getText(), cells.get(1).getText(), null, null, null, null,null, null, null);
             contacts.add(contact);
         }
         return contacts;
