@@ -31,6 +31,8 @@ public class GroupDate {
     return this;
   }
 
+
+
   public GroupDate withHeader(String header) {
     this.header = header;
     return this;
@@ -46,12 +48,13 @@ public class GroupDate {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     GroupDate groupDate = (GroupDate) o;
-    return Objects.equals(name, groupDate.name);
+    return id == groupDate.id &&
+            Objects.equals(name, groupDate.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name);
+    return Objects.hash(id, name);
   }
 
   @Override

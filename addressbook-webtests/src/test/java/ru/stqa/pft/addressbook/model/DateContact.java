@@ -33,6 +33,21 @@ public class DateContact {
     return phone2;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    DateContact contact = (DateContact) o;
+    return id == contact.id &&
+            Objects.equals(firstname, contact.firstname) &&
+            Objects.equals(lastname, contact.lastname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, lastname);
+  }
+
   public String getPhone3() {
     return phone3;
   }
@@ -54,7 +69,6 @@ public class DateContact {
   }
 
   public DateContact withId(int id) {
-
     this.id = id;
     return this;
   }
@@ -102,20 +116,6 @@ public class DateContact {
   public DateContact  withContact(String group) {
     this.contact = group;
     return this;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    DateContact contact = (DateContact) o;
-    return Objects.equals(firstname, contact.firstname) &&
-            Objects.equals(lastname, contact.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(firstname, lastname);
   }
 
 
