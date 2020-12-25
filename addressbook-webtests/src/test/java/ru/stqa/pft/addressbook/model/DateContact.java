@@ -3,9 +3,10 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class DateContact {
-  private int id;
+  private int id = Integer.MAX_VALUE;
   private String firstname;
   private String lastname;
+  private String contact;
   private String address;
   private String phone1;
   private String phone2;
@@ -13,36 +14,6 @@ public class DateContact {
   private String email;
   private String address2;
 
-
-  private String contact;
-
-
-
-  public DateContact(String firstname, String lastname, String group, String address, String phone1, String phone2, String phone3, String email, String address2) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.contact = group;
-    this.address = address;
-    this.phone1 = phone1;
-    this.phone2 = phone2;
-    this.phone3 = phone3;
-    this.email = email;
-    this.address2 = address2;
-  }
-
-  public DateContact(int id, String firstname, String lastname, String group, String address, String phone1, String phone2, String phone3, String email, String address2) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.contact = group;
-    this.address = address;
-    this.phone1 = phone1;
-    this.phone2 = phone2;
-    this.phone3 = phone3;
-    this.email = email;
-    this.address2 = address2;
-  }
 
   public String getFirstname() {
     return firstname;
@@ -52,10 +23,8 @@ public class DateContact {
     return lastname;
   }
 
-  public String getAddress() {
-    return address;
+  public String getAddress() { return address;
   }
-
   public String getPhone1() {
     return phone1;
   }
@@ -80,12 +49,59 @@ public class DateContact {
     return contact;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
   public int getId() {
     return id;
+  }
+
+  public DateContact withId(int id) {
+
+    this.id = id;
+    return this;
+  }
+
+  public DateContact  withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public DateContact  withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public DateContact  withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public DateContact  withPhone1(String phone1) {
+    this.phone1 = phone1;
+    return this;
+  }
+
+  public DateContact  withPhone2(String phone2) {
+    this.phone2 = phone2;
+    return this;
+  }
+
+  public DateContact  withPhone3(String phone3) {
+    this.phone3 = phone3;
+    return this;
+  }
+
+  public DateContact  withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public DateContact  withAddress2(String address2) {
+    this.address2 = address2;
+    return this;
+  }
+
+  public DateContact  withContact(String group) {
+    this.contact = group;
+    return this;
   }
 
   @Override
