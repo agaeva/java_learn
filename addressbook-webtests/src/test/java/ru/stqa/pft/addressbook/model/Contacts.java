@@ -33,8 +33,4 @@ public class Contacts extends ForwardingSet<DateContact> {
     return contacts;
   }
 
-
-
-
-
 }

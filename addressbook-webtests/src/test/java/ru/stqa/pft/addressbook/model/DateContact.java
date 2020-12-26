@@ -7,12 +7,17 @@ public class DateContact {
   private String firstname;
   private String lastname;
   private String contact;
-  private String address;
-  private String phone1;
-  private String phone2;
-  private String phone3;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+  private String allPhones;
   private String email;
+  private String email2;
+  private String email3;
+  private String allEmails;
+  private String address;
   private String address2;
+  private String allAddress;
 
 
   public String getFirstname() {
@@ -23,33 +28,21 @@ public class DateContact {
     return lastname;
   }
 
-  public String getAddress() { return address;
-  }
-  public String getPhone1() {
-    return phone1;
+  public String getAddress() {
+    return address;
   }
 
-  public String getPhone2() {
-    return phone2;
+  public String getHomePhone() {
+    return homePhone;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    DateContact contact = (DateContact) o;
-    return id == contact.id &&
-            Objects.equals(firstname, contact.firstname) &&
-            Objects.equals(lastname, contact.lastname);
+  public String getMobilePhone() {
+    return mobilePhone;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
-  }
 
-  public String getPhone3() {
-    return phone3;
+  public String getWorkPhone() {
+    return workPhone;
   }
 
   public String getEmail() {
@@ -68,57 +61,111 @@ public class DateContact {
     return id;
   }
 
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public String getEmail2() {
+    return email2;
+  }
+  public String getEmail3() {
+    return email3;
+  }
+  public String getAllEmails() {
+    return allEmails;
+  }
+  public String getAllAddress() {
+    return allAddress;
+  }
+
+  public DateContact withAllAddress(String allAddress) {
+    this.allAddress = allAddress;
+    return this;
+  }
+
+  public DateContact withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public DateContact withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public DateContact withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public DateContact withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
   public DateContact withId(int id) {
     this.id = id;
     return this;
   }
 
-  public DateContact  withFirstname(String firstname) {
+  public DateContact withFirstname(String firstname) {
     this.firstname = firstname;
     return this;
   }
 
-  public DateContact  withLastname(String lastname) {
+  public DateContact withLastname(String lastname) {
     this.lastname = lastname;
     return this;
   }
 
-  public DateContact  withAddress(String address) {
+  public DateContact withAddress(String address) {
     this.address = address;
     return this;
   }
 
-  public DateContact  withPhone1(String phone1) {
-    this.phone1 = phone1;
+  public DateContact withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
     return this;
   }
 
-  public DateContact  withPhone2(String phone2) {
-    this.phone2 = phone2;
+  public DateContact withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
     return this;
   }
 
-  public DateContact  withPhone3(String phone3) {
-    this.phone3 = phone3;
+  public DateContact withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
     return this;
   }
 
-  public DateContact  withEmail(String email) {
+  public DateContact withEmail(String email) {
     this.email = email;
     return this;
   }
 
-  public DateContact  withAddress2(String address2) {
+  public DateContact withAddress2(String address2) {
     this.address2 = address2;
     return this;
   }
 
-  public DateContact  withContact(String group) {
+  public DateContact withContact(String group) {
     this.contact = group;
     return this;
   }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, lastname);
+  }
 
-
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    DateContact contact = (DateContact) o;
+    return id == contact.id &&
+            Objects.equals(firstname, contact.firstname) &&
+            Objects.equals(lastname, contact.lastname);
+  }
   @Override
   public String toString() {
     return "DateContact{" +

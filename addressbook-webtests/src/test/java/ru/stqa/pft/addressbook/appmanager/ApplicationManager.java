@@ -50,7 +50,7 @@ public class ApplicationManager {
         return navigationHelper;
     }
 
-    public ContactHelper contactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 }

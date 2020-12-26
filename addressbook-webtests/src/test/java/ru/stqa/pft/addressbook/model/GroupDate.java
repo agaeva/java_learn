@@ -17,11 +17,15 @@ public class GroupDate {
     return header;
   }
 
-  public String getFooter() {    return footer;  }
+  public String getFooter() {
+    return footer;
+  }
 
-  public int getId() {    return id;  }
+  public int getId() {
+    return id;
+  }
 
-  public GroupDate withId (int id) {
+  public GroupDate withId(int id) {
     this.id = id;
     return this;
   }
@@ -30,7 +34,6 @@ public class GroupDate {
     this.name = name;
     return this;
   }
-
 
 
   public GroupDate withHeader(String header) {
