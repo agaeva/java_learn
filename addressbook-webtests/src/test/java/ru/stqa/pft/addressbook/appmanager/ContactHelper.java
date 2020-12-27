@@ -35,11 +35,11 @@ public class ContactHelper extends HelperBase {
     addType(By.name("address2"), groupDataContact.getAddress2());
     attach(By.name("photo"), groupDataContact.getPhoto());
 
-    if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDataContact.getContact());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+//    if (creation) {
+//      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDataContact.getContact());
+//    } else {
+//      Assert.assertFalse(isElementPresent(By.name("new_group")));
+//    }
   }
 
   public void createContact(DataContact contact, boolean creation) {

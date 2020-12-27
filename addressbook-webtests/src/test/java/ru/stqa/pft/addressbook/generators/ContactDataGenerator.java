@@ -57,6 +57,15 @@ public class ContactDataGenerator {
       contacts.add(new DataContact()
               .withFirstname(String.format("Ivan %s", i))
               .withLastname(String.format("Petrov %s", i))
+              .withContact("test")
+              .withHomePhone("557868686")
+              .withMobilePhone("938374664")
+              .withWorkPhone("383664664")
+              .withEmail("test@test.ru")
+              .withEmail2("test2@test.ru")
+              .withEmail3("test3@test.ru")
+              .withAddress("Tver")
+              .withAddress2("r")
       );
     }
 
