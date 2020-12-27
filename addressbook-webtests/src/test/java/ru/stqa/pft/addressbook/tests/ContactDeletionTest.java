@@ -3,7 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.DateContact;
+import ru.stqa.pft.addressbook.model.DataContact;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,7 +15,7 @@ public class ContactDeletionTest extends TestBase {
   public void ensurePrecondition() {
     app.contact().goToHomePage();
     if (!app.group().isThereGroup()) {
-      app.contact().createContact(new DateContact() .withFirstname("Ivan")
+      app.contact().createContact(new DataContact() .withFirstname("Ivan")
               .withLastname("Petrov")
               .withContact("test1")
               .withHomePhone("557868686")
@@ -33,7 +33,7 @@ public class ContactDeletionTest extends TestBase {
   public void testContactDeletion() throws Exception {
 
     Contacts before = app.contact().all();
-    DateContact deletedContact = before.iterator().next();
+    DataContact deletedContact = before.iterator().next();
     app.contact().deletionContact(deletedContact);
     Contacts after = app.contact().all();
     assertThat(app.contact().getContactCount(), equalTo(before.size() - 1));

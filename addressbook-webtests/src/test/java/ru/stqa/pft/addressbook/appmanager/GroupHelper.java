@@ -3,12 +3,10 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import ru.stqa.pft.addressbook.model.GroupDate;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -24,10 +22,10 @@ public class GroupHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillGroupForm(GroupDate groupDate) {
-    type(By.name("group_name"), groupDate.getName());
-    type(By.name("group_header"), groupDate.getHeader());
-    type(By.name("group_footer"), groupDate.getFooter());
+  public void fillGroupForm(GroupData groupData) {
+    type(By.name("group_name"), groupData.getName());
+    type(By.name("group_header"), groupData.getHeader());
+    type(By.name("group_footer"), groupData.getFooter());
   }
 
   public void initGroupCreation() {
@@ -53,7 +51,7 @@ public class GroupHelper extends HelperBase {
   }
 
 
-  public void create(GroupDate group) {
+  public void create(GroupData group) {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
@@ -61,7 +59,7 @@ public class GroupHelper extends HelperBase {
     returnToGroupPage();
   }
 
-  public void modifyGroup(GroupDate group) {
+  public void modifyGroup(GroupData group) {
     selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
@@ -71,7 +69,7 @@ public class GroupHelper extends HelperBase {
   }
 
 
-  public void deleteGroup(GroupDate group) {
+  public void deleteGroup(GroupData group) {
     selectGroupById(group.getId());
     deleteSelectedGroups();
     groupCache = null;
@@ -98,7 +96,7 @@ public class GroupHelper extends HelperBase {
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groupCache.add(new GroupDate().withId(id).withName(name));
+      groupCache.add(new GroupData().withId(id).withName(name));
     }
     return new Groups (groupCache);
   }

@@ -1,24 +1,51 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
 import java.util.Objects;
 
-public class DateContact {
+public class DataContact {
   private int id = Integer.MAX_VALUE;
+  @Expose
   private String firstname;
+  @Expose
   private String lastname;
+  @Expose
   private String contact;
+  @Expose
   private String homePhone;
+  @Expose
   private String mobilePhone;
+  @Expose
   private String workPhone;
+  @Expose
   private String allPhones;
+  @Expose
   private String email;
+  @Expose
   private String email2;
+  @Expose
   private String email3;
+  @Expose
   private String allEmails;
+  @Expose
   private String address;
+  @Expose
   private String address2;
+  @Expose
   private String allAddress;
+  @Expose
+  private File photo;
 
+  public File getPhoto() {
+    return photo;
+  }
+
+  public DataContact withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public String getFirstname() {
     return firstname;
@@ -78,77 +105,77 @@ public class DateContact {
     return allAddress;
   }
 
-  public DateContact withAllAddress(String allAddress) {
+  public DataContact withAllAddress(String allAddress) {
     this.allAddress = allAddress;
     return this;
   }
 
-  public DateContact withEmail2(String email2) {
+  public DataContact withEmail2(String email2) {
     this.email2 = email2;
     return this;
   }
 
-  public DateContact withEmail3(String email3) {
+  public DataContact withEmail3(String email3) {
     this.email3 = email3;
     return this;
   }
 
-  public DateContact withAllEmails(String allEmails) {
+  public DataContact withAllEmails(String allEmails) {
     this.allEmails = allEmails;
     return this;
   }
 
-  public DateContact withAllPhones(String allPhones) {
+  public DataContact withAllPhones(String allPhones) {
     this.allPhones = allPhones;
     return this;
   }
 
-  public DateContact withId(int id) {
+  public DataContact withId(int id) {
     this.id = id;
     return this;
   }
 
-  public DateContact withFirstname(String firstname) {
+  public DataContact withFirstname(String firstname) {
     this.firstname = firstname;
     return this;
   }
 
-  public DateContact withLastname(String lastname) {
+  public DataContact withLastname(String lastname) {
     this.lastname = lastname;
     return this;
   }
 
-  public DateContact withAddress(String address) {
+  public DataContact withAddress(String address) {
     this.address = address;
     return this;
   }
 
-  public DateContact withHomePhone(String homePhone) {
+  public DataContact withHomePhone(String homePhone) {
     this.homePhone = homePhone;
     return this;
   }
 
-  public DateContact withMobilePhone(String mobilePhone) {
+  public DataContact withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
     return this;
   }
 
-  public DateContact withWorkPhone(String workPhone) {
+  public DataContact withWorkPhone(String workPhone) {
     this.workPhone = workPhone;
     return this;
   }
 
-  public DateContact withEmail(String email) {
+  public DataContact withEmail(String email) {
     this.email = email;
     return this;
   }
 
-  public DateContact withAddress2(String address2) {
+  public DataContact withAddress2(String address2) {
     this.address2 = address2;
     return this;
   }
 
-  public DateContact withContact(String group) {
+  public DataContact withContact(String group) {
     this.contact = group;
     return this;
   }
@@ -161,7 +188,7 @@ public class DateContact {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    DateContact contact = (DateContact) o;
+    DataContact contact = (DataContact) o;
     return id == contact.id &&
             Objects.equals(firstname, contact.firstname) &&
             Objects.equals(lastname, contact.lastname);

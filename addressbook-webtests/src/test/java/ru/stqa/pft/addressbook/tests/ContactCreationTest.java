@@ -2,8 +2,8 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.DateContact;
-
+import ru.stqa.pft.addressbook.model.DataContact;
+import java.io.File;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,7 +18,9 @@ public class ContactCreationTest extends TestBase {
 //    if (!app.group().isThereGroup()) {
 //      app.group().create(new GroupDate().withName("test1").withFooter("test2").withHeader("test3"));
 //    }
-    DateContact contact = new DateContact()
+    File photo = new File("src/test/resources/Operator.png");
+
+    DataContact contact = new DataContact()
             .withFirstname("Ivan")
             .withLastname("Petrov")
             .withContact("test1")
@@ -29,7 +31,9 @@ public class ContactCreationTest extends TestBase {
             .withEmail2("test2@test.ru")
             .withEmail3("test3@test.ru")
             .withAddress("Tver")
-            .withAddress2("r");
+            .withAddress2("r")
+            .withPhoto(photo);
+
     app.contact().createContact(contact, true);
     assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
 

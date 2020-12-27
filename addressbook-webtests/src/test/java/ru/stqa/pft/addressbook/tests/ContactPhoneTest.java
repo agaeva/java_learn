@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.DateContact;
+import ru.stqa.pft.addressbook.model.DataContact;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -12,14 +12,14 @@ public class ContactPhoneTest extends TestBase {
    @Test
    public void testContactPhones() {
      app.contact().goToHomePage();
-     DateContact contact = app.contact().all().iterator().next();
-     DateContact contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+     DataContact contact = app.contact().all().iterator().next();
+     DataContact contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
      assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
 
    }
 
-  private String mergePhones(DateContact contact) {
+  private String mergePhones(DataContact contact) {
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
               .stream().filter((s) -> ! s.equals(""))
             .map(ContactPhoneTest::cleaned)

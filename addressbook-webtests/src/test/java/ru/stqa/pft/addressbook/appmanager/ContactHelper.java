@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.DateContact;
+import ru.stqa.pft.addressbook.model.DataContact;
 
 import java.util.List;
 
@@ -21,27 +21,28 @@ public class ContactHelper extends HelperBase {
     clickContact(By.xpath("//input[21]"));
   }
 
-  public void fillFormContact(DateContact groupDateContact, boolean creation) {
-    addType(By.name("firstname"), groupDateContact.getFirstname());
-    addType(By.name("lastname"), groupDateContact.getLastname());
-    addType(By.name("home"), groupDateContact.getHomePhone());
-    addType(By.name("mobile"), groupDateContact.getMobilePhone());
-    addType(By.name("work"), groupDateContact.getWorkPhone());
+  public void fillFormContact(DataContact groupDataContact, boolean creation) {
+    addType(By.name("firstname"), groupDataContact.getFirstname());
+    addType(By.name("lastname"), groupDataContact.getLastname());
+    addType(By.name("home"), groupDataContact.getHomePhone());
+    addType(By.name("mobile"), groupDataContact.getMobilePhone());
+    addType(By.name("work"), groupDataContact.getWorkPhone());
     clickContact(By.name("fax"));
-    addType(By.name("email"), groupDateContact.getEmail());
-    addType(By.name("email2"), groupDateContact.getEmail2());
-    addType(By.name("email3"), groupDateContact.getEmail3());
-    addType(By.name("address"), groupDateContact.getAddress());
-    addType(By.name("address2"), groupDateContact.getAddress2());
+    addType(By.name("email"), groupDataContact.getEmail());
+    addType(By.name("email2"), groupDataContact.getEmail2());
+    addType(By.name("email3"), groupDataContact.getEmail3());
+    addType(By.name("address"), groupDataContact.getAddress());
+    addType(By.name("address2"), groupDataContact.getAddress2());
+    attach(By.name("photo"), groupDataContact.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDateContact.getContact());
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupDataContact.getContact());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
-  public void createContact(DateContact contact, boolean creation) {
+  public void createContact(DataContact contact, boolean creation) {
     clickButtonAdd();
     fillFormContact(contact, creation);
     addAllContact();
@@ -49,7 +50,7 @@ public class ContactHelper extends HelperBase {
     goToHomePage();
   }
 
-  public void modifyContact(DateContact contact) {
+  public void modifyContact(DataContact contact) {
     editContactById(contact.getId());
     fillFormContact(contact, false);
     addContact();
@@ -59,7 +60,7 @@ public class ContactHelper extends HelperBase {
 
 
 
-  public void deletionContact(DateContact contact) {
+  public void deletionContact(DataContact contact) {
     selectContactById(contact.getId());
     deleteContact();
     alertMessage();
@@ -123,7 +124,7 @@ public class ContactHelper extends HelperBase {
       String allPhones = cells.get(5).getText();
 
 
-      DateContact contact = new DateContact().withId(id)
+      DataContact contact = new DataContact().withId(id)
               .withFirstname(firstname)
               .withLastname(lastname)
               .withAllAddress(allAddress)
@@ -135,7 +136,7 @@ public class ContactHelper extends HelperBase {
     return new Contacts (contactCache);
   }
 
-  public DateContact infoFromEditForm(DateContact contact) {
+  public DataContact infoFromEditForm(DataContact contact) {
     editContactById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
@@ -149,7 +150,7 @@ public class ContactHelper extends HelperBase {
     String address2 = wd.findElement(By.name("address2")).getAttribute("value");
     wd.navigate().back();
 
-    return new DateContact().withId(contact.getId())
+    return new DataContact().withId(contact.getId())
             .withFirstname(firstname)
             .withLastname(lastname)
             .withHomePhone(home)

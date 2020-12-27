@@ -1,8 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.DateContact;
+import ru.stqa.pft.addressbook.model.DataContact;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -14,15 +12,15 @@ public class ContactEmailTest extends TestBase{
   @Test
   public void testContactEmails() {
     app.contact().goToHomePage();
-    DateContact contact = app.contact().all().iterator().next();
-    DateContact contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    DataContact contact = app.contact().all().iterator().next();
+    DataContact contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
     assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
 
 
 
   }
 
-  private String mergeEmails(DateContact contact) {
+  private String mergeEmails(DataContact contact) {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s) -> ! s.equals(""))
             .map(ContactEmailTest::cleaned)
