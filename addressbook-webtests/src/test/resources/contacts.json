@@ -11,31 +11,5 @@
     "email3": "test3@test.ru",
     "address": "Tver",
     "address2": "r"
-  },
-  {
-    "firstname": "Ivan 1",
-    "lastname": "Petrov 1",
-    "contact": "test",
-    "homePhone": "557868686",
-    "mobilePhone": "938374664",
-    "workPhone": "383664664",
-    "email": "test@test.ru",
-    "email2": "test2@test.ru",
-    "email3": "test3@test.ru",
-    "address": "Tver",
-    "address2": "r"
-  },
-  {
-    "firstname": "Ivan 2",
-    "lastname": "Petrov 2",
-    "contact": "test",
-    "homePhone": "557868686",
-    "mobilePhone": "938374664",
-    "workPhone": "383664664",
-    "email": "test@test.ru",
-    "email2": "test2@test.ru",
-    "email3": "test3@test.ru",
-    "address": "Tver",
-    "address2": "r"
   }
 ]
