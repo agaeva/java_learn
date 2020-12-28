@@ -10,6 +10,7 @@
     "email2": "test2@test.ru",
     "email3": "test3@test.ru",
     "address": "Tver",
-    "address2": "r"
+    "address2": "r",
+    "photo": "src\\test\\resources\\Operator.png"
   }
 ]

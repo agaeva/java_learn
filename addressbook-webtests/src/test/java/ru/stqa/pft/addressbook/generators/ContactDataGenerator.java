@@ -53,6 +53,7 @@ public class ContactDataGenerator {
 
   private List<DataContact> generateContacts(int count) {
     List<DataContact> contacts = new ArrayList<DataContact>();
+    File photo = new File("src/test/resources/Operator.png");
 
     for (int i = 0; i < count; i++) {
       contacts.add(new DataContact()
@@ -67,6 +68,7 @@ public class ContactDataGenerator {
               .withEmail3("test3@test.ru")
               .withAddress("Tver")
               .withAddress2("r")
+              .withPhoto(photo)
       );
     }
 

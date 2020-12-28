@@ -37,7 +37,7 @@ public class ContactCreationTest extends TestBase {
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(DataContact contact) throws Exception {
     app.contact().goToHomePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
 //    if (!app.group().isThereGroup()) {
 //      app.group().create(new GroupData().withName("test1").withFooter("test2").withHeader("test3"));
 //    }
@@ -45,7 +45,7 @@ public class ContactCreationTest extends TestBase {
     app.contact().createContact(contact, true);
     assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
 
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size() + 1));
 
     assertThat(after, equalTo(
