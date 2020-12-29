@@ -59,7 +59,7 @@ public class ContactDataGenerator {
       contacts.add(new DataContact()
               .withFirstname(String.format("Ivan %s", i))
               .withLastname(String.format("Petrov %s", i))
-              .withContact("test")
+//              .withContact("test")
               .withHomePhone("557868686")
               .withMobilePhone("938374664")
               .withWorkPhone("383664664")

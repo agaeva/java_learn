@@ -52,12 +52,15 @@ public class GroupHelper extends HelperBase {
 
 
   public void create(GroupData group) {
+
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     groupCache = null;
     returnToGroupPage();
   }
+
+
 
   public void modifyGroup(GroupData group) {
     selectGroupById(group.getId());
@@ -75,7 +78,8 @@ public class GroupHelper extends HelperBase {
     groupCache = null;
     returnToGroupPage();
   }
-
+  private void inGroup() {
+  }
   public boolean isThereGroup() {
     return isElementPresent(By.name("selected[]"));
   }

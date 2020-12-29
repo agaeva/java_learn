@@ -50,6 +50,8 @@ public class ContactHelper extends HelperBase {
     goToHomePage();
   }
 
+
+
   public void modifyContact(DataContact contact) {
     editContactById(contact.getId());
     fillFormContact(contact, false);
@@ -102,6 +104,17 @@ public class ContactHelper extends HelperBase {
 
   public void homeClick() {
     clickContact(By.linkText("home page"));
+  }
+  public void addGroupToContact() {
+    clickContact(By.name("to_group"));
+    clickContact(By.name("to_group"));
+    clickContact(By.name("add"));
+  }
+  public void pageAddGroupToContact() {
+    wd.findElement(By.partialLinkText("group page")).click();  }
+
+    public void clickRemove() {
+      clickContact(By.name("remove"));
   }
 
   private Contacts contactCache = null;
@@ -162,5 +175,7 @@ public class ContactHelper extends HelperBase {
             .withAddress(address)
             .withAddress2(address2);
   }
+
+
 }
 

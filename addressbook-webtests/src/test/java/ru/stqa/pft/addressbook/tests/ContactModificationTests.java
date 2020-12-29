@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase {
       app.contact().createContact(new DataContact()
               .withFirstname("Ivan")
               .withLastname("Petrov")
-              .withContact("test1")
+//              .withContact("test1")
               .withHomePhone("557868686")
               .withMobilePhone("938374664")
               .withWorkPhone("383664664")
@@ -57,7 +57,9 @@ public class ContactModificationTests extends TestBase {
     assertThat(app.contact().getContactCount(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+    verifyContactListInUI();
   }
+
 
 
 }

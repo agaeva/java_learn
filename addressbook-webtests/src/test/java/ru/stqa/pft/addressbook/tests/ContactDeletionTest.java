@@ -17,7 +17,7 @@ public class ContactDeletionTest extends TestBase {
     if (!app.group().isThereGroup()) {
       app.contact().createContact(new DataContact() .withFirstname("Ivan")
               .withLastname("Petrov")
-              .withContact("test1")
+//              .withContact("test1")
               .withHomePhone("557868686")
               .withMobilePhone("938374664")
               .withWorkPhone("383664664")
@@ -38,6 +38,7 @@ public class ContactDeletionTest extends TestBase {
     Contacts after = app.db().contacts();
     assertThat(app.contact().getContactCount(), equalTo(before.size() - 1));
     assertThat(after, equalTo(before.without(deletedContact)));
+    verifyContactListInUI();
 
   }
 

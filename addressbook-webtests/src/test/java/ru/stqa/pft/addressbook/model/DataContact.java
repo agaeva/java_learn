@@ -5,7 +5,14 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "addressbook")
@@ -23,9 +30,7 @@ public class DataContact {
   @Column(name = "lastname")
   private String lastname;
 
-  @Expose
-  @Transient
-  private String contact;
+
 
   @Expose
   @Column(name = "home")
@@ -79,6 +84,13 @@ public class DataContact {
   @Type(type = "text")
   private String photo;
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable (name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   public File getPhoto() {
     return new File(photo);
@@ -118,9 +130,7 @@ public class DataContact {
     return address2;
   }
 
-  public String getContact() {
-    return contact;
-  }
+
 
   public int getId() {
     return id;
@@ -239,16 +249,15 @@ public class DataContact {
     return this;
   }
 
-  public DataContact withContact(String group) {
-    this.contact = group;
-    return this;
-  }
 
   public DataContact withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
   }
-
+  public DataContact inGroup (GroupData group){
+    groups.add(group);
+    return this;
+  }
 
   @Override
   public String toString() {
