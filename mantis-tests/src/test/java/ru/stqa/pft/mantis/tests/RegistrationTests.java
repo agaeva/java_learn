@@ -22,20 +22,14 @@ public class RegistrationTests extends TestBase {
 
     @Test
     public void testRegistrationWiser() throws IOException, MessagingException {
-        // Текущее время в миллисекундах от 01.01.1970
         long now = System.currentTimeMillis();
         String email = String.format("user%s@localhost.localdomain", now);
         String user = String.format("user%s", now);
         String password = "password";
-        //Заполнение и отправка формы регистрации
         app.registration().start(user, email);
-        // Ожидание почтового сообщения
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 20000);
-        // Извлечение ссылки на подтверждение регистрации
         String confirmationLink = findConfirmationLink(mailMessages, email);
-        // Проверка, что вход в приложение выполнен успешно
         app.registration().finish(confirmationLink, password);
-        // Проверка, что вход в приложение выполнен успешно
         assertTrue(app.newSession().login(user, password));
     }
 
@@ -55,8 +49,6 @@ public class RegistrationTests extends TestBase {
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
         MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-        // Поиск ссылки на подтверждение регистрации с помощью библотеки verbalregex
-        // Найти подстроку "http://", за ней должны идти один или более непробельных символов
         VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
         return regex.getText(mailMessage.text);
     }
