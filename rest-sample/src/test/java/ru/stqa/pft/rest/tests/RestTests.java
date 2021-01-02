@@ -8,7 +8,7 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestTests extends ru.stqa.pft.test.rest.tests.TestBase {
+public class RestTests extends TestBase {
 
   @Test
   public void testCreateIssue() throws IOException {

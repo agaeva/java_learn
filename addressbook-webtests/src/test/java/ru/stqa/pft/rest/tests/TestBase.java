@@ -13,11 +13,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import ru.stqa.pft.rest.appmanager.ApplicationManager;
 import ru.stqa.pft.rest.model.Contacts;
-import ru.stqa.pft.rest.model.GroupData;
 import ru.stqa.pft.rest.model.DataContact;
+import ru.stqa.pft.rest.model.GroupData;
 import ru.stqa.pft.rest.model.Groups;
+import ru.stqa.pft.rest.appmanager.ApplicationManager;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

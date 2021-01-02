@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.testng.Assert.*;
 
-public class RestAssuredTests extends ru.stqa.pft.test.rest.tests.TestBase {
+public class RestAssuredTests extends TestBase {
 
   @BeforeClass
   public void init() {
@@ -36,7 +36,7 @@ public class RestAssuredTests extends ru.stqa.pft.test.rest.tests.TestBase {
     assertEquals(newIssues, oldIssues);
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   public void testOpenIssue() {
     Issue issue = app.restAssured().getIssue(65);
     assertEquals(issue.getStatus(), "Open");

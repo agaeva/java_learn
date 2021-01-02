@@ -1,4 +1,4 @@
-package ru.stqa.pft.test.rest.tests;
+package ru.stqa.pft.rest.tests;
 
 import org.testng.SkipException;
 import org.testng.annotations.BeforeSuite;
