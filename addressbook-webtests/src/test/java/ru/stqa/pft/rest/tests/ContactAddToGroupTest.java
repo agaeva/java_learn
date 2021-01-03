@@ -1,71 +1,55 @@
 package ru.stqa.pft.rest.tests;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.rest.model.Contacts;
 import ru.stqa.pft.rest.model.DataContact;
 import ru.stqa.pft.rest.model.GroupData;
+import ru.stqa.pft.rest.model.Groups;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertFalse;
 
 public class ContactAddToGroupTest extends TestBase {
 
-  @DataProvider
-  public Iterator<Object[]> validContactsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")))) {
-      String json = "";
-      String line = reader.readLine();
 
-      while (line != null) {
-        json += line;
-        line = reader.readLine();
-      }
-      Gson gson = new Gson();
-      List<DataContact> contacts = gson.fromJson(json, new TypeToken<List<DataContact>>() {
-      }.getType());
+    @BeforeMethod
+    public void ensurePreconditions() {
+        if (app.db().contacts().size() == 0) {
+            app.contact().goToHomePage();
+            DataContact contact = new DataContact().withFirstname("Ivan").withLastname("Petrov").withEmail("test@test.ru");
+            app.contact().createContact(contact, true);
+        }
 
-      return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
-    }
-  }
-
-  @Test(dataProvider = "validContactsFromJson")
-  public void testContactAddToGroup(DataContact contact) throws Exception {
-    app.goTo().groupPage();
-
-    if (!app.group().isThereGroup()) {
-      app.group().create(new GroupData().withName("test1").withFooter("test2").withHeader("test3"));
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("test1"));
+        }
     }
 
-    Contacts before = app.db().contacts();
-    app.contact().goToHomePage();
-    app.contact().createContact(contact, true);
-    assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
-    Contacts after = app.db().contacts();
-    assertThat(after.size(), equalTo(before.size() + 1));
+    @Test
+    public void testContactAddToGroup() {
+        Contacts beforeContacts = app.db().contacts();
+        DataContact selectContact = beforeContacts.iterator().next();
+        Groups beforeGroups = app.db().groups();
+        GroupData selectGroup = beforeGroups.iterator().next();
+        app.contact().goToHomePage();
 
-    assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream()
-                    .mapToInt((c) -> c.getId()).max().getAsInt()))));
-    verifyContactListInUI();
-
-    int i = app.contact().all().stream()
-            .mapToInt(DataContact::getId).max().orElseThrow();
-    app.contact().selectContactById(i);
-    app.contact().addGroupToContact();
-    app.contact().pageAddGroupToContact();
-    assertFalse(app.db().contacts().stream().filter(d -> d.getId() == i).findFirst().orElseThrow().getGroups().isEmpty());
-
-  }
+        if (!selectContact.getGroups().isEmpty() && selectContact.getGroups().contains(selectGroup)) {
+            app.contact().deleteContactFromGroup(selectContact, selectGroup);
+          Groups exp = selectContact.getGroups().without(selectGroup);
+         Groups res =  app.db().contacts().stream().
+                  filter((c) -> c.getId() == selectContact.getId())
+                 .collect(Collectors.toList()).get(0).getGroups();
+          assertThat(exp, equalTo(res));
+            app.contact().goToHomePage();
+        }
+        app.contact().selectShowGroup("[all]");
+        app.contact().addContactToGroup(selectContact, selectGroup);
+        assertThat(selectContact.getGroups().withAdded(selectGroup), equalTo(app.db().contacts().stream().
+                filter((c) -> c.getId() == selectContact.getId())
+                .collect(Collectors.toList()).get(0).getGroups()));
+    }
 }

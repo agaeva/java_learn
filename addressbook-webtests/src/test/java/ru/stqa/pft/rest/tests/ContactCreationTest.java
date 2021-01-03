@@ -57,16 +57,5 @@ public class ContactCreationTest extends TestBase {
                         .mapToInt((c) -> c.getId()).max().getAsInt()))));
         verifyContactListInUI();
 
-        int i = app.contact().all().stream()
-                .mapToInt(DataContact::getId).max().orElseThrow();
-        app.contact().selectContactById(i);
-        app.contact().addGroupToContact();
-        app.contact().pageAddGroupToContact();
-       assertFalse(app.db().contacts().stream().filter(d -> d.getId() == i).findFirst().orElseThrow().getGroups().isEmpty());
-
-        app.contact().selectContactById(i);
-        app.contact().clickRemove();
-        assertTrue(app.db().contacts().stream().filter(d -> d.getId() == i).findFirst().orElseThrow().getGroups().isEmpty());
-
     }
 }

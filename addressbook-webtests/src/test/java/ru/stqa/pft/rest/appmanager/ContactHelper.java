@@ -3,8 +3,10 @@ package ru.stqa.pft.rest.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.rest.model.Contacts;
 import ru.stqa.pft.rest.model.DataContact;
+import ru.stqa.pft.rest.model.GroupData;
 
 import java.util.List;
 
@@ -39,6 +41,8 @@ public class ContactHelper extends HelperBase {
 //      Assert.assertFalse(isElementPresent(By.name("new_group")));
 //    }
   }
+
+
 
   public void createContact(DataContact contact, boolean creation) {
     clickButtonAdd();
@@ -104,24 +108,9 @@ public class ContactHelper extends HelperBase {
     clickContact(By.linkText("home page"));
   }
 
-  public void addGroupToContact() {
-    clickContact(By.name("to_group"));
-    clickContact(By.name("to_group"));
-    clickContact(By.name("add"));
+  public void deleteFromGroup(String name) {
+    click(By.name("remove"));
   }
-  public void pageAddGroupToContact() {
-    wd.findElement(By.partialLinkText("group page")).click();  }
-
-    public void clickRemove() {
-      clickContact(By.name("remove"));
-  }
-
-   public void selectGroupToContact() {
-      clickContact(By.name("group"));
-    clickContact(By.name("group"));
-
-    }
-
 
   private Contacts contactCache = null;
 
@@ -183,5 +172,21 @@ public class ContactHelper extends HelperBase {
   }
 
 
+  public void selectShowGroup(String name) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText(name);
+  }
+
+
+  public void addContactToGroup(DataContact contact, GroupData group) {
+    selectContactById(contact.getId());
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+    click(By.name("add"));
+  }
+
+  public void deleteContactFromGroup(DataContact contact, GroupData group) {
+    selectShowGroup(group.getName());
+    selectContactById(contact.getId());
+    deleteFromGroup(group.getName());
+  }
 }
 
